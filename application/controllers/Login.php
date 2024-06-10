@@ -31,10 +31,11 @@ class Login extends CI_Controller
 
 		if ($raw[0] != NULL) {
 			$id_mhs = $raw[0]['NamaPengguna'];
+
 			$getData = $this->checkUser($id_mhs);
 			// var_dump($getData);
 			// die();
-			if ($getData != NULL) {
+			if ($getData != 2) {
 				$timeout = 2000;
 				$sessionArray = array(
 					'no_mhs' => $getData['no_mhs'],
@@ -76,9 +77,10 @@ class Login extends CI_Controller
 		$raw = file_get_contents($url);
 		//$raw = file_get_contents('getMhs.txts');
 		$raw = json_decode($raw, true);
-		if ($raw != NULL) {
+		if ($raw['status'] != 2) {
 			return $raw['data'][0];
 		}
+		return $raw['status'];
 	}
 
 	public function logout()
