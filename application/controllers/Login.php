@@ -78,7 +78,6 @@ class Login extends CI_Controller
 		if ($raw != NULL) {
 			return $raw['data'][0];
 		}
-		return 0;
 	}
 
 	public function logout()
