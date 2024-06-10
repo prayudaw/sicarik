@@ -70,7 +70,6 @@ class Login extends CI_Controller
 			echo json_encode($response);
 		}
 	}
-
 	public function checkUser($id_mhs)
 	{
 		$url = API . 'mahasiswa?no_mhs=' . $id_mhs;
