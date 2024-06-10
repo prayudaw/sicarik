@@ -65,6 +65,8 @@ class Login extends CI_Controller
 				'status' => 2,
 				'message' => 'Username atau Password salah',
 			);
+
+			
 			echo json_encode($response);
 		}
 	}
