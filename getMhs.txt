@@ -1,0 +1,1 @@
+{"status":1,"message":"Get Mahasiswa Successfully.","data":[{"no_mhs":"23106050053","nama":"HANNAH KHAIRUNNISA FILZAH","status":"A","alamat":"-","tgl_daftar":"2023-09-04","tgl_aktif":"0000-00-00","angkatan":"2023","jurusan":"Teknik Informatika (S1)","fakultas":"Sains dan Teknologi"}]}
