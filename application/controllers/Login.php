@@ -23,7 +23,9 @@ class Login extends CI_Controller
 		if ($pass == '1234') {
 			$raw[0]['NamaPengguna'] = $post['username'];
 		} else {
-			$url = "http://api-super.uin-suka.ac.id/servad/adlogauthgr.php?aud=8f304662ebfee3932f2e810aa8fb628715&uss=" . $username . "&pss=" . $post['password'];
+			$url = API_SUPER . "&uss=" . $username . "&pss=" . $post['password'];
+			var_dump($url);
+			die();
 			$raw = file_get_contents($url);
 			//$raw = file_get_contents('authUser.txt');
 			$raw = json_decode($raw, true);
