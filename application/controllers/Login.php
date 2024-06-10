@@ -66,7 +66,7 @@ class Login extends CI_Controller
 				'message' => 'Username atau Password salah',
 			);
 
-			
+
 			echo json_encode($response);
 		}
 	}
@@ -81,6 +81,8 @@ class Login extends CI_Controller
 			return $raw['data'][0];
 		}
 	}
+
+
 
 	public function logout()
 	{
