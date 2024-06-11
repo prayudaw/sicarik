@@ -23,7 +23,7 @@ class Buku extends BaseController
         $id_mhs = $this->session->userdata('no_mhs');
         //$id_mhs = '22101020056';
 
-        $url = API . 'transaksi';
+        $url = API . 'transaksi.php';
         $postdata = http_build_query(
             array(
                 'no_mhs' =>  $id_mhs,
