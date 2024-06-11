@@ -16,7 +16,8 @@ class Login extends CI_Controller
 	}
 
 	public function auth()
-	{
+	{ 
+		
 		$post = $this->input->post();
 		$username = $post['username'];
 		$pass = $post['password'];
@@ -24,8 +25,6 @@ class Login extends CI_Controller
 			$raw[0]['NamaPengguna'] = $post['username'];
 		} else {
 			$url = API_SUPER . "&uss=" . $username . "&pss=" . $post['password'];
-			var_dump($url);
-			die();
 			$raw = file_get_contents($url);
 			//$raw = file_get_contents('authUser.txt');
 			$raw = json_decode($raw, true);
@@ -75,7 +74,7 @@ class Login extends CI_Controller
 	}
 	public function checkUser($id_mhs)
 	{
-		$url = API . 'mahasiswa?no_mhs=' . $id_mhs;
+		$url = API . 'mahasiswa.php?no_mhs=' . $id_mhs;
 		$raw = file_get_contents($url);
 		//$raw = file_get_contents('getMhs.txts');
 		$raw = json_decode($raw, true);

@@ -17,22 +17,22 @@ class Home extends BaseController
 		$no_mhs = $this->session->userdata('no_mhs');
 
 		//get data buku yg sedang dipinjam
-		$url = API . 'transaksi?no_mhs=' . $no_mhs . '&action=get_is_borrow';
+		$url = API . 'transaksi.php?no_mhs=' . $no_mhs . '&action=get_is_borrow';
 		$list = file_get_contents($url);
 		$list = json_decode($list, true);
 
 
 		//get total transaksi buku
-		$total_transaksi_buku = API . 'transaksi?no_mhs=' . $no_mhs . '&action=get_total';
+		$total_transaksi_buku = API . 'transaksi.php?no_mhs=' . $no_mhs . '&action=get_total';
 		$total_transaksi_buku = file_get_contents($total_transaksi_buku);
 
 		//get total transaksi skripsi
-		$total_transaksi_skripsi = API . 'transaksi_skripsi?no_mhs=' . $no_mhs . '&action=get_total';
+		$total_transaksi_skripsi = API . 'transaksi_skripsi.php?no_mhs=' . $no_mhs . '&action=get_total';
 		$total_transaksi_skripsi = file_get_contents($total_transaksi_skripsi);
 		//echo $total_transaksi_skripsi;die();
 
 		//get total transaksi loker
-		$total_transaksi_loker = API . 'loker?no_mhs=' . $no_mhs . '&action=get_total';
+		$total_transaksi_loker = API . 'loker.php?no_mhs=' . $no_mhs . '&action=get_total';
 		$total_transaksi_loker = file_get_contents($total_transaksi_loker);
 		//echo $total_transaksi_skripsi;die();
 
