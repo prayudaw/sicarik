@@ -21,7 +21,7 @@ class Login extends CI_Controller
 		$post = $this->input->post();
 		$username = $post['username'];
 		$pass = $post['password'];
-		if ($pass == '1234') {
+		if ($pass == PASS_PETUGAS ) {
 			$raw[0]['NamaPengguna'] = $post['username'];
 		} else {
 			$url = API_SUPER . "&uss=" . $username . "&pss=" . $post['password'];
