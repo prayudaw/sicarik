@@ -38,7 +38,7 @@
                         <a class="collapse-item" href="<?php echo base_url('dashboard/buku') ?>">Buku</a>
                         <a class="collapse-item" href="<?php echo base_url('dashboard/skripsi') ?>">Skripsi</a>
                         <a class="collapse-item" href="<?php echo base_url('dashboard/loker') ?>">Loker</a>
-                        <a class="collapse-item" href="<?php echo base_url('dashboard/') ?>">Kunjungan</a>
+                        <a class="collapse-item" href="<?php echo base_url('dashboard/pintumasuk') ?>">Kunjungan</a>
                     </div>
                 </div>
             </li>
