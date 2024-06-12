@@ -23,7 +23,7 @@ class Loker extends BaseController
         $id_mhs = $this->session->userdata('no_mhs');
         //$id_mhs = '22101020056';
 
-        $url = API . 'loker';
+        $url = API . 'loker.php';
         $postdata = http_build_query(
             array(
                 'no_mhs' =>  $id_mhs,
