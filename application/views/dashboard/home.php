@@ -131,7 +131,7 @@
                                            <?php } ?>
                                        </div>
 
-                                   <?php }  ?>
+                                   <?php } ?>
                                    <!-- <table class="table table-success">
                                        <thead>
                                            <tr>

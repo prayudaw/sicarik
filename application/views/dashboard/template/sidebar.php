@@ -53,7 +53,7 @@
 
              <!-- Nav Item - Histori Peminjaman Kunjungan -->
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo base_url('pintumasuk') ?>">
+                <a class="nav-link" href="<?php echo base_url('dashboard/pintumasuk') ?>">
                     <i class="fas fa-fw fa-clock"></i>
                     <span>Histori Kunjungan</span></a>
             </li>
