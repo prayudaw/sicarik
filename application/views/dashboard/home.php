@@ -125,13 +125,13 @@
                                     $date = date('Y-m-d');
                                     foreach ($is_borrow['data'] as $list) { ?>
                                        <div class="bg-light border border-primary p-3 mb-3">
-                                           <h3><?php echo $list['judul'] ?></h3><span>Buku dipinjam tanggal <?php echo $list['tgl_pinjam'] ?> Harap dikembalikan <?php echo $list['tgl_kembali'] ?></span>
+                                           <h4><?php echo $list['judul'] ?></h4><span>Buku dipinjam tanggal <?php echo $list['tgl_pinjam'] ?> Harap dikembalikan <?php echo $list['tgl_kembali'] ?></span>
                                            <?php if ($list['tgl_kembali'] < $date) { ?>
                                                <div style="background-color: red;color:white;">Lama terlambat <b><?php echo $list['list_denda']['jhd'] ?></b> hari Jumlah Denda <?php echo $list['list_denda']['denda'] ?> </div>
                                            <?php } ?>
                                        </div>
 
-                                   <?php }  ?>
+                                   <?php } ?>
                                    <!-- <table class="table table-success">
                                        <thead>
                                            <tr>
