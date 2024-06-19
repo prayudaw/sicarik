@@ -69,7 +69,7 @@
                                     </div>
                                     <form action="" method="post" class="user">
                                         <div class="form-group">
-                                            <input type="number" name="username" class="form-control form-control-user" id="username" aria-describedby="emailHelp" placeholder="Enter Username">
+                                            <input type="text" name="username" class="form-control form-control-user" id="username" aria-describedby="emailHelp" placeholder="Enter Username">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="password">

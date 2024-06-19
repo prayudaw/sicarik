@@ -11,7 +11,7 @@ class Send_email extends CI_Controller
         $raw = json_decode($raw, true);
         $getdata = $raw['data'];
 
-        // var_dump($data);
+        // var_dump($getdata);
         // die();
 
         if (!empty($getdata)) {
