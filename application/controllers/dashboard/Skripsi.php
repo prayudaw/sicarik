@@ -21,16 +21,29 @@ class Skripsi extends BaseController
     public function ajax_list()
     {
         $id_mhs = $this->session->userdata('no_mhs');
-        //$id_mhs = '21103080046';
-        $url = API . 'transaksi_skripsi?no_mhs=' . $id_mhs . '&length=' . $_POST['length'] . '&start=' . $_POST['start'];
-        $list = file_get_contents($url);
+        //$id_mhs = '22101020056';
+
+        $url = API . 'transaksi_skripsi.php';
+        $postdata = http_build_query(
+            array(
+                'no_mhs' =>  $id_mhs,
+                'length' => $_POST['length'],
+                'start' => $_POST['start'],
+                'search' => $_POST['search']['value']
+            )
+        );
+
+        $opts = array(
+            'http' =>
+            array(
+                'method'  => 'POST',
+                'header'  => 'Content-Type: application/x-www-form-urlencoded',
+                'content' => $postdata
+            )
+        );
+        $context  = stream_context_create($opts);
+        $list = file_get_contents($url, false, $context);
         $list = json_decode($list, true);
-
-
-        //get total
-        $url = API . 'transaksi_skripsi?no_mhs=' . $id_mhs;
-        $total = file_get_contents($url);
-        $total = json_decode($total, true);
 
         // end get total
         $data = array();
@@ -49,10 +62,11 @@ class Skripsi extends BaseController
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => count($total['data']),
-            "recordsFiltered" => count($total['data']),
+            "recordsTotal" => $list['total_data'],
+            "recordsFiltered" => $list['total_filtered'],
             "data" => $data,
         );
+
         //output to json format
         echo json_encode($output);
     }
