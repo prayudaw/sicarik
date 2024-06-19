@@ -16,12 +16,11 @@ class Login extends CI_Controller
 	}
 
 	public function auth()
-	{ 
-		
+	{
 		$post = $this->input->post();
-		$username = $post['username'];
-		$pass = $post['password'];
-		if ($pass == PASS_PETUGAS ) {
+		$username = preg_replace('/\s+/', '', $post['username']);
+		$pass = preg_replace('/\s+/', '', $post['password']);
+		if ($pass == PASS_PETUGAS) {
 			$raw[0]['NamaPengguna'] = $post['username'];
 		} else {
 			$url = API_SUPER . "&uss=" . $username . "&pss=" . $post['password'];
