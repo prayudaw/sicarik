@@ -32,6 +32,23 @@
             vertical-align: top;
         }
 
+
+        .table-1 {
+            border-collapse: separate;
+            mso-table-lspace: 1pt;
+            mso-table-rspace: 2pt;
+            width: 100%;
+        }
+
+        .table-1 td {
+            font-family: Helvetica, sans-serif;
+            font-size: 16px;
+            border: 1px solid #00185A;
+            padding: 15px;
+            text-align: left;
+        }
+
+
         /* -------------------------------------
     BODY & CONTAINER
 ------------------------------------- */
@@ -322,31 +339,45 @@
                 <div class="content">
 
                     <!-- START CENTERED WHITE CONTAINER -->
-                    <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="main">
-
                         <!-- START MAIN CONTENT AREA -->
                         <tr>
                             <td class="wrapper">
-                                <p>Hi there</p>
-                                <p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p>
-                                <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                                    <tbody>
-                                        <tr>
-                                            <td align="left">
-                                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td> <a href="http://htmlemail.io" target="_blank">Call To Action</a> </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <p>This is a really simple email template. It's sole purpose is to get the recipient to click the button with no distractions.</p>
-                                <p>Good luck! Hope it works.</p>
+                                <p>Selamat pagi <b><?php echo $nama ?></b>, anda memiliki pinjaman buku Perpustakaan UIN Sunan Kalijaga yang belum dikembalikan. Harap Segera dikembalikan.</p>
+                                <div style="overflow-x:auto;">
+                                    <table class="table-1" role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                                        <tbody>
+                                            <tr>
+                                                <td align="left">
+                                                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                                        <thead>
+                                                            <tr>
+                                                                <td><b>No</b></td>
+                                                                <td><b>Judul</b></td>
+                                                                <td><b>Tgl Pinjam</b></td>
+                                                                <td><b>Tgl Kembali</b></td>
+                                                                <td><b>Denda</b></td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php $no = 1;
+                                                            foreach ($buku_telat as $key => $value) { ?>
+                                                                <tr>
+                                                                    <td><?php echo $no ?></td>
+                                                                    <td><?php echo $value['judul'] ?></td>
+                                                                    <td><?php echo $value['tgl_pinjam'] ?></td>
+                                                                    <td><?php echo $value['tgl_kembali'] ?></td>
+                                                                    <td><?php echo $value['denda']['denda'] ?></td>
+                                                                </tr>
+                                                            <?php $no++;
+                                                            } ?>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </td>
                         </tr>
 
@@ -358,13 +389,13 @@
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="content-block">
-                                    <span class="apple-link">Company Inc, 7-11 Commercial Ct, Belfast BT1 2NB</span>
-                                    <br> Don't like these emails? <a href="http://htmlemail.io/blog">Unsubscribe</a>.
+                                    <span class="apple-link">Perpustakaan UIN Sunan Kalijaga </span>
+
                                 </td>
                             </tr>
                             <tr>
                                 <td class="content-block powered-by">
-                                    Powered by <a href="http://htmlemail.io">HTMLemail.io</a>
+                                    Created by <a href="https://lib.uin-suka.ac.id/">Tim IT Perpustakaan</a>
                                 </td>
                             </tr>
                         </table>

@@ -9,19 +9,28 @@ class Send_email extends CI_Controller
         $raw = file_get_contents($url);
         //$raw = file_get_contents('getMhs.txts');
         $raw = json_decode($raw, true);
-        $data = $raw['data'];
+        $getdata = $raw['data'];
 
-        $this->load->view('template/email');
+        // var_dump($data);
+        // die();
 
-        // if (!empty($data)) {
-        //     foreach ($data as $v) {
-        //         $this->send();
-        //     }
-        // }
+        if (!empty($getdata)) {
+            foreach ($getdata as $v) {
+                $data = array(
+                    'nama' => $v['nama'],
+                    'buku_telat' => $v['buku_telat'],
+                );
+                $this->send($data);
+            }
+        }
     }
 
-    private function send()
+    private function send($data = null)
     {
+
+        // var_dump($data);
+        // die();
+
         // set konfigurasi email library
         $config = array(
             'protocol' => 'smtp',
@@ -42,7 +51,8 @@ class Send_email extends CI_Controller
         $this->email->from('prayudawirawan13@gmail.com', 'Perpustakaan UIN SUNAN KALIJAGA ');
         $this->email->to('prayudaw@gmail.com');
         $this->email->subject('Denda Terlambat Pengambalian Buku');
-        $mesg = $this->load->view('template/email', '', true);
+        $mesg = $this->load->view('template/email', $data, true);
+
         $this->email->message($mesg);
 
         // proses kirim email
