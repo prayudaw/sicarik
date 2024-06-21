@@ -1,7 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Login extends CI_Controller
+require APPPATH . '/core/BaseController.php';
+
+class Login extends BaseController
 {
 
 	public function index()
@@ -47,6 +49,9 @@ class Login extends CI_Controller
 					'isLoggedIn' => TRUE,
 					'expires_time' => time() + $timeout
 				);
+
+               //insert log login
+			   //$this->insert_log_login($sessionArray);
 
 				$this->session->set_userdata($sessionArray);
 				$response = array(

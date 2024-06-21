@@ -4,6 +4,7 @@ class BaseController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('login_model');
     }
 
     public function isLoggedIn()
@@ -12,6 +13,7 @@ class BaseController extends CI_Controller
         if (!isset($isLoggedIn) || $isLoggedIn !== TRUE) {
             redirect('login');
         } else {
+
         }
     }
 
@@ -24,6 +26,12 @@ class BaseController extends CI_Controller
             $this->session->sess_destroy();
             redirect('login');
             return false;
+        
         }
     }
+
+    public function insert_log_login($data){
+          var_dump($data);die();
+    }
+    
 }
