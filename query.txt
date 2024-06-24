@@ -1,0 +1,16 @@
+CREATE DATABASE `sicarik`; 
+
+CREATE TABLE `log_login` (
+  `tgl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_login` enum('1','0') NOT NULL,
+  `nim` varchar(20) NOT NULL,
+  `ip` varchar(25) NOT NULL,
+  `device` varchar(50) DEFAULT NULL,
+  `nameBrowser` varchar(50) DEFAULT NULL,
+  `platform` varchar(50) DEFAULT NULL,
+  `countryCode` varchar(3) DEFAULT NULL,
+  `isp` varchar(50) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`tgl`),
+  KEY `tgl` (`tgl`)
+)
