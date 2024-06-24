@@ -1,7 +1,7 @@
 CREATE DATABASE `sicarik`; 
 
-CREATE TABLE `ulum_logsicarik` (
-  `tgl` datetime NOT NULL,
+CREATE TABLE `log_login` (
+  `tgl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `is_login` enum('1','0') NOT NULL,
   `nim` varchar(20) NOT NULL,
   `ip` varchar(25) NOT NULL,
