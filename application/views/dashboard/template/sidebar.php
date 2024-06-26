@@ -60,6 +60,15 @@
                     <i class="fas fa-fw fa-clock"></i>
                     <span>Histori Kunjungan Serial</span></a>
                 </li>
+
+
+                   <!-- Nav Item - Histori Peminjaman Kunjungan -->
+             <li class="nav-item active">
+                <a class="nav-link" href="<?php echo base_url('dashboard/referensi') ?>">
+                    <i class="fas fa-fw fa-clock"></i>
+                    <span>Histori Kunjungan Referensi</span></a>
+              </li>
+                
                 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
