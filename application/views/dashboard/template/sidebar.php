@@ -28,8 +28,7 @@
                     <span>Histori Buku</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+        
             
             <!-- Nav Item - Histori Peminjaman Skripsi -->
             <li class="nav-item active">
@@ -38,9 +37,6 @@
                     <span>Histori Skripsi</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
              <!-- Nav Item - Histori Peminjaman Kunci Locker -->
              <li class="nav-item active">
                 <a class="nav-link" href="<?php echo base_url('dashboard/loker') ?>">
@@ -48,15 +44,22 @@
                     <span>Histori Locker</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
+    
              <!-- Nav Item - Histori Peminjaman Kunjungan -->
             <li class="nav-item active">
                 <a class="nav-link" href="<?php echo base_url('dashboard/pintumasuk') ?>">
                     <i class="fas fa-fw fa-clock"></i>
                     <span>Histori Kunjungan</span></a>
             </li>
+
+ 
+
+            <!-- Nav Item - Histori Peminjaman Kunjungan -->
+                <li class="nav-item active">
+                <a class="nav-link" href="<?php echo base_url('dashboard/serial') ?>">
+                    <i class="fas fa-fw fa-clock"></i>
+                    <span>Histori Kunjungan Serial</span></a>
+                </li>
                 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

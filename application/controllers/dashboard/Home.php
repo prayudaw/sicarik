@@ -43,10 +43,17 @@ class Home extends BaseController
 		//echo $total_transaksi_pintumasuk;die();
 
 
+		//get total kunjungan serial
+		$total_kunjungan_serial = API . 'serial.php?no_mhs=' . $no_mhs . '&action=get_total';
+		$total_kunjungan_serial = file_get_contents($total_kunjungan_serial);
+	    //echo $total_kunjungan_serial;die();
+
+
 		$data['jumlah_transaksi_loker'] = $total_transaksi_loker;
 		$data['jumlah_transaksi_buku'] = $total_transaksi_buku;
 		$data['jumlah_transaksi_skripsi'] = $total_transaksi_skripsi;
 		$data['jumlah_transaksi_pintumasuk'] = $total_transaksi_pintumasuk;
+		$data['jumlah_kunjungan_serial'] = $total_kunjungan_serial;
 		$data['is_borrow'] = $list;
 
 		$this->load->view('dashboard/home', $data);

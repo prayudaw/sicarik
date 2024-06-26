@@ -118,7 +118,7 @@
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             Histori Kunjungan Serial</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $jumlah_transaksi_pintumasuk ?></div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $jumlah_kunjungan_serial ?></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-clock fa-2x text-gray-300"></i>
