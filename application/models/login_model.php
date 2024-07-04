@@ -43,9 +43,5 @@ class login_model extends CI_model
         $this->db->set($data);
         $this->db->insert('queue_email');  
        
-
-
-    
-
-    
+     }
 }
