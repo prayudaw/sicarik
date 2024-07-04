@@ -33,6 +33,16 @@ class login_model extends CI_model
         return $query->result_array();
     }
 
+    public function getStatus($nim){
+        $this->db->select('status');
+        $this->db->from('queue_email');
+        $this->db->where('nim',$nim);
+        $query = $this->db->get();
+        //$this->db->limit(1); 
+        //echo $this->db->last_query();die();
+        return $query->row_array();
+    }
+
     public function updateQueueEmail($nim,$set){
         $this->db->set('buku_telat', $set);
         $this->db->where('nim', $nim);
@@ -41,7 +51,8 @@ class login_model extends CI_model
 
     public function updateQueue($nim,$data){
         $this->db->set($data);
-        $this->db->insert('queue_email');  
+        $this->db->where('nim', $nim);
+        $this->db->update('queue_email');  
        
      }
 }

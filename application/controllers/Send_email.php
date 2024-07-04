@@ -16,13 +16,15 @@ class Send_email extends CI_Controller
         //$raw = file_get_contents('getMhs.txts');
         $raw = json_decode($raw, true);
         $getdata = $raw['data'];
-
-        //var_dump($getdata);die();
+        //echo count($getdata);die();
+        //var_dump($getdata[0]['buku_telat']);die();
 
         if (!empty($getdata)) {
             foreach ($getdata as $v) {
-                $check_queue=$this->login_model->checkQueueEmail($v['no_mhs']);
-                if($check_queue ==  0){
+                $check_data_antrian=$this->login_model->checkQueueEmail($v['no_mhs']);
+                $check_status_kirim =$this->login_model->getStatus($v['no_mhs']);
+
+                if($check_data_antrian ==  0 ){
                     $data = array(
                         'nama' => $v['nama'],
                         'nim' => $v['no_mhs'],
@@ -31,23 +33,28 @@ class Send_email extends CI_Controller
                         'status' => 0
                     );
                     //var_dump($data);die();
-                   $insert = $this->login_model->insert_queue_email($data);
+                    $insert = $this->login_model->insert_queue_email($data);
                 }
-                else
-                {   
-                     $update =$this->login_model->updateQueueEmail($v['no_mhs'],json_encode($v['buku_telat']) );
+
+                //var_dump($check_status_kirim['status']);die();
+                if($check_data_antrian ==  1 && $check_status_kirim['status'] == 1  ){
+                    $data = array(
+                        'buku_telat' =>json_encode($v['buku_telat']),
+                        'status'=>0
+                     );
+                     $update =$this->login_model->updateQueue($v['no_mhs'],$data );                 
                 }
+    
                 //$this->send($data);
             }
         }
     }
 
     private function getEmail($nim){    
-            
-            // if(str_contains($nim,'-DP')){
-            //     die('tes');
-            // }
-            
+        // var_dump($nim);die();
+            if(strpos($nim,'-DP')){
+               $nim=str_replace('-DP','',$nim);
+            }       
             $curl = curl_init();
             curl_setopt_array($curl, array(
             CURLOPT_URL => 'http://api.uin-suka.ac.id/akademik/v2/getMahasiswa',
@@ -61,7 +68,7 @@ class Send_email extends CI_Controller
             CURLOPT_POSTFIELDS => 'data_search=a.NIM%3D\''.$nim.'\'',
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/x-www-form-urlencoded',
-                'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJc3N1ZXIgb2YgdGhlIEpXVCIsImF1ZCI6IkF1ZGllbmNlIHRoYXQgdGhlIEpXVCIsInN1YiI6IlN1YmplY3Qgb2YgdGhlIEpXVCIsImlhdCI6MTcxOTk5MzkyMywiZXhwIjoxNzE5OTk3NTIzLCJuaXAiOiJBQ0MuQVBJLlBFUlBVUyIsIm5hbWEiOiJBQ0MgUEVSUFVTIiwiYWtzZXMiOiJBUElBS0QuUC5NSFMuUiJ9.WHz8-ANqaMyjuRZhK7EhRvKs3IJ10njUZGPDHjyeIb8'
+                'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJc3N1ZXIgb2YgdGhlIEpXVCIsImF1ZCI6IkF1ZGllbmNlIHRoYXQgdGhlIEpXVCIsInN1YiI6IlN1YmplY3Qgb2YgdGhlIEpXVCIsImlhdCI6MTcyMDA3OTAwMywiZXhwIjoxNzIwMDgyNjAzLCJuaXAiOiJBQ0MuQVBJLlBFUlBVUyIsIm5hbWEiOiJBQ0MgUEVSUFVTIiwiYWtzZXMiOiJBUElBS0QuUC5NSFMuUiJ9.10HtP_MBlfhjsgHOq6VGfZ9oVFzy39ouiwNAPTHSKnQ'
             ),
             ));
             $response = curl_exec($curl);
@@ -75,19 +82,11 @@ class Send_email extends CI_Controller
             }
             return $email_address;        
     }
-
-
-    private function getToken(){
- 
-
-    }
     
 
     public function send()
     {
-        // var_dump($data);
-        // die();  
-        $data_queue=$this->login_model->getData();
+        $data_queue=$this->login_model->getData();    
         foreach ($data_queue as $v) {
 
              $data = array(
@@ -106,7 +105,6 @@ class Send_email extends CI_Controller
                 'charset' => 'iso-8859-1',
                 'wordwrap' => TRUE,
             );
-            
 
             // load library email
             $this->load->library('email', $config);
@@ -126,7 +124,10 @@ class Send_email extends CI_Controller
                 show_error($this->email->print_debugger());
             } else {
                 // tampilkan keterangan sukses kirim email
-                echo 'Success to send email';
+                $data = array(
+                    'status'=>1
+                 );
+                 $update =$this->login_model->updateQueue($v['nim'],$data);
             }
         }
 
