@@ -14,3 +14,13 @@ CREATE TABLE `log_login` (
   PRIMARY KEY (`tgl`),
   KEY `tgl` (`tgl`)
 )
+
+
+
+CREATE TABLE `queue_email` (
+  `nama` varchar(100) DEFAULT NULL,
+  `nim` varchar(100) DEFAULT NULL,
+  `buku_telat` text DEFAULT NULL,
+  `status` int(21) DEFAULT NULL,
+  `Email` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
