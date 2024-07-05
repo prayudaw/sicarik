@@ -10,24 +10,23 @@ class Send_email extends CI_Controller
 
     public function index()
     {  
+        $getToken=$this->getToken();
         $url = API . 'late_book.php';
         $raw = file_get_contents($url);
         //$raw = file_get_contents('getMhs.txts');
         $raw = json_decode($raw, true);
         $getdata = $raw['data'];
-        //echo count($getdata);die();
-        //var_dump($getdata[0]['buku_telat']);die();
-
+  
         if (!empty($getdata)) {
             foreach ($getdata as $v) {
                 $check_data_antrian=$this->login_model->checkQueueEmail($v['no_mhs']);
                 $check_status_kirim =$this->login_model->getStatus($v['no_mhs']);
-
+                
                 if($check_data_antrian ==  0 ){
                     $data = array(
                         'nama' => $v['nama'],
                         'nim' => $v['no_mhs'],
-                        'email' => $this->getEmail($v['no_mhs']),
+                        'email' => $this->getEmail($v['no_mhs'],$getToken),
                         'buku_telat' => json_encode($v['buku_telat']),
                         'status' => 0
                     );
@@ -36,15 +35,16 @@ class Send_email extends CI_Controller
                 }
 
                 //var_dump($check_status_kirim['status']);die();
-                if($check_data_antrian ==  1 && $check_status_kirim['status'] == 1 &&  $v['tgl_dikembalikan'] == '0000-00-00' ){
-                    $data = array(
-                        'buku_telat' =>json_encode($v['buku_telat']),
-                        'status'=>0
-                     );
-                     $update =$this->login_model->updateQueue($v['no_mhs'],$data );                 
+                else if($check_data_antrian ==  1 && $check_status_kirim['status'] == 1 &&  $v['tgl_dikembalikan'] == '0000-00-00' ){
+                    // $data = array(
+                    //     'buku_telat' =>json_encode($v['buku_telat']),
+                    //     'status'=>0
+                    //  );
+                    //  $update =$this->login_model->updateQueue($v['no_mhs'],$data );                 
                 }
-                //$this->send($data);
+               
             }
+            $this->send();
         }
     }
 
@@ -61,8 +61,8 @@ class Send_email extends CI_Controller
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS =>'{
-            "nip":"ACC.API.PERPUS",
-            "password":"95233554"
+            "nip":"'.USER_ACC_PERPUS.'",
+            "password":"'.PASS_ACC_PERPUS.'"
         }',
         CURLOPT_HTTPHEADER => array(
             'Content-Type: application/json'
@@ -80,12 +80,12 @@ class Send_email extends CI_Controller
         return $token;            
     }
 
-    private function getEmail($nim){    
+    private function getEmail($nim,$getToken){    
         // var_dump($nim);die();
             if(strpos($nim,'-DP')){
                $nim=str_replace('-DP','',$nim);
             } 
-            $getToken=$this->getToken();
+            //$getToken=$this->getToken();
  
             $curl = curl_init();
             curl_setopt_array($curl, array(
@@ -128,13 +128,14 @@ class Send_email extends CI_Controller
                 'buku_telat' => json_decode($v['buku_telat'],true),
             );
 
+
               // set konfigurasi email library
             $config = array(
                 'protocol' => 'smtp',
                 'smtp_host' => 'ssl://smtp.gmail.com',
                 'smtp_port' => 465,
-                'smtp_user' => 'prayudawirawan13@gmail.com',
-                'smtp_pass' => 'nnhnbatlkqqtqhlt',
+                'smtp_user' => SMTP_USER,
+                'smtp_pass' => SMTP_PASS,
                 'mailtype' => 'html',
                 'charset' => 'iso-8859-1',
                 'wordwrap' => TRUE,
